@@ -21,6 +21,7 @@ public class RequestHelper {
         httpPost.setHeader("Content-type", "application/json; charset=UTF-8");
 
         CloseableHttpResponse response = httpClient.execute(httpPost); // executa requisicao
+        httpClient.close();
         if (response.getStatusLine().getStatusCode() == 200) {
             return true;
         }
