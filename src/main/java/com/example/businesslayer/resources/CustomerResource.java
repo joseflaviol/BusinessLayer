@@ -2,18 +2,30 @@ package com.example.businesslayer.resources;
 
 import com.example.businesslayer.models.Customer;
 import com.example.businesslayer.services.CustomerService;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.io.IOException;
+import java.util.List;
 
 @Path("customer")
 public class CustomerResource {
 
     CustomerService customerService = new CustomerService();
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllCustomers() throws IOException {
+       return this.customerService.findAllCustomers();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public String getCustomer(@PathParam("id") Long id) throws IOException {
+        return this.customerService.findCustomer(id.toString());
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
