@@ -16,8 +16,9 @@ public class CustomerResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllCustomers() throws IOException {
-       return this.customerService.findAllCustomers();
+    @Path("/paginated/{range}")
+    public String getAllCustomers(@PathParam("range") int range) throws IOException {
+       return this.customerService.findAllCustomers(range);
     }
 
     @GET
@@ -30,6 +31,11 @@ public class CustomerResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createCustomer(Customer customer) throws IOException {
+        if (customer.getFirstName() == null || customer.getLastName() == null || customer.getEmailAddress() == null ||
+            customer.getPhoneNumber() == null || customer.getAddress() == null || customer.getCountry() == null ||
+            customer.getState() == null) {
+            return Response.status(400).build();
+        }
         if (this.customerService.insertCustomer(customer)) {
             return Response.status(200).build(); // caso o customer tenha sido inserido, retorna uma reposta com status 200
         }

@@ -18,6 +18,9 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(User user) throws IOException {
+        if (user.getUsername() == null || user.getPassword() == null || user.getGroup() == null) {
+            return Response.status(400).build();
+        }
         if (this.userService.insertUser(user)) {
             return Response.status(200).build();
         }
@@ -28,10 +31,13 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/login")
     public Response login(User user) throws IOException {
+        if (user.getUsername() == null || user.getPassword() == null) {
+            return Response.status(400).build();
+        }
         if (this.userService.login(user)) {
             return Response.status(200).build();
         }
-        return Response.status(400).build();
+        return Response.status(404).build();
     }
 
 }
