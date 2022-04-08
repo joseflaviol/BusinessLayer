@@ -1,1 +1,1 @@
-web: java -jar --deploy target/BusinessLayer-1.0-SNAPSHOT.war --port 8082
+web: java -jar target/BusinessLayer-1.0-SNAPSHOT.war --port 8082
