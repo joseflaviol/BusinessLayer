@@ -41,6 +41,9 @@ public class RequestHelper {
         CloseableHttpResponse response = httpClient.execute(httpGet);
         HttpEntity entity = response.getEntity();
         String result = EntityUtils.toString(entity);
+        if (result.charAt(0) == '<') {
+            result = null;
+        }
         return result;
     }
 

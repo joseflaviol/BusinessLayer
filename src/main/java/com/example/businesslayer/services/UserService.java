@@ -11,7 +11,7 @@ public class UserService {
     private String url = "http://localhost:3000/api/user"; // url do DataLayer
 
     public boolean insertUser(User user) throws IOException {
-        return this.requestHelper.post(url, user.toJson());
+        return this.requestHelper.post(url + "/insert", user.toJson());
     }
 
     public boolean login(User user) throws IOException {
