@@ -24,7 +24,7 @@ public class UserResource {
             return Response.status(400).entity(new ErrorHelper("campo em branco")).build();
         }
         if (this.userService.insertUser(user)) {
-            return Response.status(200).build();
+            return Response.status(200).entity(user).build();
         }
         return Response.status(400).entity(new ErrorHelper("cadastro nao efetuado")).build();
     }

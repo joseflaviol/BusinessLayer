@@ -17,9 +17,9 @@ public class CustomerResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    //@Path("/paginated/{range}")
-    public String getAllCustomers(/*@PathParam("range") int range*/) throws IOException {
-       return this.customerService.findAllCustomers(/*range*/);
+    @Path("/paginated/{range}")
+    public String getAllCustomers(@PathParam("range") int range) throws IOException {
+       return this.customerService.findAllCustomers(range);
     }
 
     @GET
